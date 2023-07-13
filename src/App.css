@@ -3,7 +3,13 @@ body {
 
 }
 
+.home, .form {
+  justify-content: center;
+  align-items: center;
+}
+
 .navbar {
+  display: flex;
   justify-content: space-between;
   align-items: center;
   color: white;
@@ -11,10 +17,29 @@ body {
   padding: 1em;
   min-height: 2em;
 }
-
 .navbar a {
   text-decoration: none;
   color: white;
   font-weight: bold;
   margin-left: 0.5em;
+}
+.navlinks {
+  display: flex;
+
+}
+
+.daddy-font {
+  background: linear-gradient(white 40%, red 60%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'Teko', sans-serif;
+  font-size: 6vmin;
+}
+.daddy-font > h4 {
+  margin: 0;
+}
+.navlinks {
+  font-family: 'Teko', sans-serif;
+  font-size: 4vmin;
 }
