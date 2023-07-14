@@ -30,7 +30,14 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route
             path="/new"
-            element={<InputLesson newLang={newLang} setLangs={setLangs} />}
+            element={
+              <InputLesson
+                newLang={newLang}
+                setLangs={setLangs}
+                langs={langs}
+                setNewLang={setNewLang}
+              />
+            }
           />
           <Route path="/list" element={<LanguageList langs={langs} />} />
           <Route

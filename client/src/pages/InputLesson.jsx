@@ -4,19 +4,24 @@ import { useState } from 'react'
 const InputLesson = (props) => {
   const addLang = (e) => {
     e.preventDefault()
-    const currentLangs = langs
+    const currentLangs = props.langs
     const addedLang = {
-      ...newLang,
-      id: parseInt(langs.length + 1)
+      ...props.newLang,
+      id: parseInt(props.langs.length + 1)
     }
     currentLangs.push(addedLang)
     props.setLangs(currentLangs)
-    setNewLang({ id: '', name: '', subject: '', notes: '', bookmarks: '' })
+    props.setNewLang({
+      id: '',
+      name: '',
+      subject: '',
+      notes: '',
+      bookmarks: ''
+    })
   }
-  console.log(langs)
 
   const handleChange = (e) => {
-    setNewLang({ ...newLang, [e.target.name]: e.target.value })
+    props.setNewLang({ ...props.newLang, [e.target.name]: e.target.value })
   }
 
   let navigate = useNavigate()
@@ -33,28 +38,28 @@ const InputLesson = (props) => {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          value={newLang.name}
+          value={props.newLang.name}
           onChange={handleChange}
           name="name"
           placeholder={'language'}
         />
         <input
           type="text"
-          value={newLang.subject}
+          value={props.newLang.subject}
           onChange={handleChange}
           name="subject"
           placeholder={'subject (add keywords here)'}
         />
         <input
           type="text-area"
-          value={newLang.notes}
+          value={props.newLang.notes}
           onChange={handleChange}
           name="notes"
           placeholder={'notes'}
         />
         <input
           type="text"
-          value={newLang.bookmarks}
+          value={props.newLang.bookmarks}
           onChange={handleChange}
           name="bookmarks"
           placeholder={'bookmark link'}
