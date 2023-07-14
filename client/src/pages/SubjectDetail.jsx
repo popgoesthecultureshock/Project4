@@ -19,11 +19,23 @@ const SubjectDetail = (props) => {
         <h1>{lang.name}</h1>
       </div>
       <div className="info-wrapper">
-        <h3>{lang.subject}</h3>
-        <p>{lang.notes}</p>
-        <p>{lang.bookmarks}</p>
+        <table>
+          <tr>
+            <td>
+              <h3>{lang.subject}</h3>
+            </td>
+            <td>
+              <p>{lang.notes}</p>
+            </td>
+            <td>
+              <a href={lang.bookmarks}>
+                <p>{lang.bookmarks}</p>
+              </a>
+            </td>
+          </tr>
+        </table>
       </div>
-      <Link to="/">
+      <Link to="/list">
         <button>Back</button>
       </Link>
     </div>

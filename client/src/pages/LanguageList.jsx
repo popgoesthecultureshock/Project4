@@ -34,29 +34,41 @@ const LanguageList = (props) => {
         />
         <h2>Search Results</h2>
         <section className="search-results container-grid">
-          {/* {searched &&
+          {searched &&
             searchResults.map((search) => (
               <Link to={`/details/${search.id}`} key={search.id}>
                 <SubjectDetail />
               </Link>
-            ))} */}
+            ))}
         </section>
       </div>
       <div className="lang-list">
-        {props.langs.map((lang) => (
-          <div className="lang-header" key={lang.id}>
-            <Link to={`${lang.id}`}>
+        <table className="lang-table">
+          {props.langs.map((lang) => (
+            <div className="lang-header" key={lang.id}>
               <div className="lang-card">
-                <h1>{lang.name}</h1>
-                <div className="info-wrapper">
-                  <h3>{lang.subject}</h3>
-                  <p>{lang.notes}</p>
-                  <p>{lang.bookmarks}</p>
-                </div>
+                <tr>
+                  <td>
+                    <h1>{lang.name}</h1>
+                  </td>
+                  <Link to={`${lang.id}`}>
+                    <div className="info-wrapper">
+                      <td>
+                        <h3>{lang.subject}</h3>
+                      </td>
+                      <td>
+                        <p>{lang.notes}</p>
+                      </td>
+                      <td>
+                        <p>{lang.bookmarks}</p>
+                      </td>
+                    </div>
+                  </Link>
+                </tr>
               </div>
-            </Link>
-          </div>
-        ))}
+            </div>
+          ))}
+        </table>
         <Link to="/">
           <button>Back</button>
         </Link>
