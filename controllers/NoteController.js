@@ -1,8 +1,16 @@
-const { Notes } = require('../models')
+const { Notes, Subject, Lang } = require('../models')
 
-const getNote = async (req, res) => {
+const getAllNotes = async (req, res) => {
   try {
-    const notes = await Notes.find({})
+    const notes = await Notes.find({}).populate('content')
+    res.send(notes)
+  } catch (error) {
+    throw error
+  }
+}
+const getNoteById = async (req, res) => {
+  try {
+    const notes = await Notes.findById(req.params.note_id).populate('content')
     res.send(notes)
   } catch (error) {
     throw error
@@ -11,7 +19,11 @@ const getNote = async (req, res) => {
 
 const createNote = async (req, res) => {
   try {
-    const note = await Notes.create({ ...req.body })
+    console.log(req.body)
+    const note = await Notes.create(req.body)
+    let subj = await Subject.findById(req.body.subject)
+    subj.notes.push(note._id)
+    await subj.save()
     res.send(note)
   } catch (error) {
     throw error
@@ -43,7 +55,8 @@ const deleteNote = async (req, res) => {
 }
 
 module.exports = {
-  getNote,
+  getAllNotes,
+  getNoteById,
   createNote,
   updateNote,
   deleteNote

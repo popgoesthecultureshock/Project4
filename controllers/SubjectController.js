@@ -1,9 +1,19 @@
-const { Subject } = require('../models')
+const { Subject, Lang } = require('../models')
 
-const getSubject = async (req, res) => {
+const getAllSubjects = async (req, res) => {
   try {
-    const subjects = await Subject.find({})
+    const subjects = await Subject.find({}).populate('language')
     res.send(subjects)
+  } catch (error) {
+    throw error
+  }
+}
+const getSubjectById = async (req, res) => {
+  try {
+    const subject = await Subject.findById(req.params.subject_id)
+      .populate('language')
+      .populate('notes')
+    res.send(subject)
   } catch (error) {
     throw error
   }
@@ -11,7 +21,13 @@ const getSubject = async (req, res) => {
 
 const createSubject = async (req, res) => {
   try {
-    const subject = await Subject.create({ ...req.body })
+    const language = await Lang.findById(req.params.id)
+    const subject = await Subject.create({
+      ...req.body,
+      language: req.params.id
+    })
+    language.subject.push(subject._id)
+    await language.save()
     res.send(subject)
   } catch (error) {
     throw error
@@ -47,7 +63,8 @@ const deleteSubject = async (req, res) => {
 }
 
 module.exports = {
-  getSubject,
+  getSubjectById,
+  getAllSubjects,
   createSubject,
   updateSubject,
   deleteSubject

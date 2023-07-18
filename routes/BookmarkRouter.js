@@ -2,7 +2,13 @@ const router = require('express').Router()
 const controller = require('../controllers/BookmarkController')
 const middleware = require('../middleware')
 
-router.get('/', controller.getBookmark)
+router.get('/', controller.getAllBookmarks)
+router.get(
+  '/:bookmark_id',
+  middleware.stripToken,
+  middleware.verifyToken,
+  controller.getBookmarkById
+)
 router.post(
   '/',
   middleware.stripToken,

@@ -1,9 +1,19 @@
 const { Bookmarks } = require('../models')
 
-const getBookmark = async (req, res) => {
+const getAllBookmarks = async (req, res) => {
   try {
-    const langs = await Bookmarks.find({})
-    res.send(langs)
+    const book = await Bookmarks.find({}).populate('url')
+    res.send(book)
+  } catch (error) {
+    throw error
+  }
+}
+const getBookmarkById = async (req, res) => {
+  try {
+    const book = await Bookmarks.findById(req.params.bookmark_id).populate(
+      'url'
+    )
+    res.send(book)
   } catch (error) {
     throw error
   }
@@ -47,7 +57,8 @@ const deleteBookmark = async (req, res) => {
 }
 
 module.exports = {
-  getBookmark,
+  getAllBookmarks,
+  getBookmarkById,
   createBookmark,
   updateBookmark,
   deleteBookmark

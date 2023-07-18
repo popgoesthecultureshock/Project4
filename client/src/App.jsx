@@ -1,14 +1,15 @@
 import { Route, Routes } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import { CheckSession } from '../services/Auth'
+import { CheckSession } from './services/Auth'
 import './App.css'
+import { getLangs } from './services/LangServices'
 import Nav from './components/Nav'
 import Home from './pages/Home'
 import InputLesson from './pages/InputLesson'
 import LanguageList from './pages/LanguageList'
 import SubjectDetail from './pages/SubjectDetail'
-import SignIn from '../pages/SignIn'
-import Register from '../pages/Register'
+import SignIn from './pages/SignIn'
+import Register from './pages/Register'
 
 const App = () => {
   const [user, setUser] = useState(null)
@@ -23,6 +24,7 @@ const App = () => {
 
   const handleLogOut = () => {
     //Reset all auth related state and clear localStorage
+    console.log('loggedOut')
     setUser(null)
     localStorage.clear()
   }
@@ -33,10 +35,15 @@ const App = () => {
   }
 
   useEffect(() => {
+    const handleLangs = async () => {
+      const data = await getLangs()
+      setLangs(data)
+    }
     const token = localStorage.getItem('token')
     if (token) {
       checkToken()
     }
+    handleLangs()
   }, [])
 
   return (

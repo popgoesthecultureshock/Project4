@@ -2,9 +2,16 @@ const router = require('express').Router()
 const controller = require('../controllers/SubjectController')
 const middleware = require('../middleware')
 
-router.get('/', controller.getSubject)
+router.get('/', controller.getAllSubjects)
+router.get(
+  '/:subject_id',
+  middleware.stripToken,
+  middleware.verifyToken,
+  controller.getSubjectById
+)
+
 router.post(
-  '/',
+  '/:subject_id',
   middleware.stripToken,
   middleware.verifyToken,
   controller.createSubject

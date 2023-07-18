@@ -2,7 +2,7 @@ const { Lang } = require('../models')
 
 const getLang = async (req, res) => {
   try {
-    const langs = await Lang.find({})
+    const langs = await Lang.find({}).populate('subject')
     res.send(langs)
   } catch (error) {
     throw error

@@ -2,15 +2,19 @@ body {
   margin: 0;
 
 }
-
-.home, .form {
+main {
+  margin: 0;
+}
+/* .home, .form {
   justify-content: center;
   align-items: center;
-}
+} */
 
-.navbar {
+header.navbar {
   display: flex;
-  justify-content: space-between;
+  justify-content:space-between;
+  width: 98%;
+  float: left;
   align-items: center;
   color: white;
   background-color: black;
@@ -42,4 +46,32 @@ body {
 .navlinks {
   font-family: 'Teko', sans-serif;
   font-size: 4vmin;
+}
+h2, h1 {
+  margin: 0;
+}
+.homeDivs {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 100%;
+  width: 100%;
+  padding-right: 25px;
+  padding-top: 25px;
+}
+.actualHomeDivs {
+  background: linear-gradient(white 40%, red 60%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+  width: 150px;
+  border: 5px solid black;
+  padding: 25px;
+  margin: 20px;
+}
+.actualHomeDivs:hover {
+  height:175px;
+  width:175px;
 }
