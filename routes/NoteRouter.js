@@ -10,7 +10,7 @@ router.get(
   controller.getNoteById
 )
 router.post(
-  '/:note_id',
+  '/',
   middleware.stripToken,
   middleware.verifyToken,
   controller.createNote

@@ -20,7 +20,7 @@ export const getBookmarkById = async (id) => {
 
 export const createBookmark = async (data) => {
   try {
-    console.log(data)
+    // console.log(data)
     const res = await Client.post('/book', data)
     return res.data
   } catch (error) {
@@ -39,7 +39,7 @@ export const updateBookmark = async (data, id) => {
 
 export const deleteBookmark = async (id) => {
   try {
-    const res = await Client.delete(`/list/${id}`)
+    const res = await Client.delete(`/book/${id}`)
     return res.data
   } catch (error) {
     throw error

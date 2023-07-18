@@ -1,5 +1,7 @@
 body {
   margin: 0;
+  /* display: flex;
+  justify-content: center; */
 
 }
 main {
@@ -49,7 +51,6 @@ header.navbar {
 }
 h2, h1 {
   margin: 0;
-  
 }
 .homeDivs {
   display: flex;
@@ -77,8 +78,9 @@ h2, h1 {
   width:175px;
 }
 
-.detail-title {
+.lang-page {
   /* display: flex;
   justify-content: center;
-  align-items: center; */
+  align-items: center;
+  flex-wrap: wrap; */
 }

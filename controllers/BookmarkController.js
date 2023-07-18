@@ -26,7 +26,7 @@ const createBookmark = async (req, res) => {
     let subj = await Subject.findById(req.body.subject)
     subj.bookmarks.push(book._id)
     await subj.save()
-    res.send(note)
+    res.send(book)
   } catch (error) {
     throw error
   }

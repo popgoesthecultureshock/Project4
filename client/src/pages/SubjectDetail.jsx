@@ -6,11 +6,14 @@ import { createBookmark } from '../services/BookServices'
 import { getSubjectById } from '../services/SubjectServices'
 import { getNotes } from '../services/NoteServices'
 import { getBookmarks } from '../services/BookServices'
+import { deleteNote } from '../services/NoteServices'
+import { deleteBookmark } from '../services/BookServices'
+import { updateNote } from '../services/NoteServices'
 
 const SubjectDetail = (props) => {
-  const [subj, setSubj] = useState('')
-  const [newNote, setNewNote] = useState('')
-  const [newBookmark, setNewBookmark] = useState('')
+  const [subj, setSubj] = useState({})
+  const [newNote, setNewNote] = useState({})
+  const [newBookmark, setNewBookmark] = useState({})
 
   let { id } = useParams()
 
@@ -19,17 +22,17 @@ const SubjectDetail = (props) => {
       let response = await getSubjectById(id)
       setSubj(response)
     }
-    const handleNotes = async () => {
-      const data = await getNotes()
-      setNewNote(data)
-    }
-    const handleBookmarks = async () => {
-      const data = await getBookmarks()
-      setNewBookmark(data)
-    }
+    // const handleNotes = async () => {
+    //   const data = await getNotes()
+    //   setNewNote(data)
+    // }
+    // const handleBookmarks = async () => {
+    //   const data = await getBookmarks()
+    //   setNewBookmark(data)
+    // }
     getSubj()
-    handleNotes()
-    handleBookmarks()
+    // handleNotes()
+    // handleBookmarks()
   }, [])
 
   const handleChange = (e) => {
@@ -42,13 +45,15 @@ const SubjectDetail = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     await createNote({ ...newNote, subject: id })
+    setNewNote({ content: '' })
   }
   const handleBookSubmit = async (e) => {
     e.preventDefault()
-    console.log(id)
-    await createBookmark(newBookmark, id)
+    console.log(newBookmark)
+    await createBookmark({ ...newBookmark, subject: id })
+    setNewBookmark({ url: '' })
   }
-
+  console.log(subj)
   return (
     <div className="lang-page">
       <div className="lang-header">{/* <h1>{subj.language.name}</h1> */}</div>
@@ -75,8 +80,16 @@ const SubjectDetail = (props) => {
                 type="text"
                 value={newBookmark.url}
                 onChange={handleBookChange}
-                name="content"
+                name="url"
                 placeholder={'add bookmarks here'}
+              />
+              <br />
+              <input
+                type="text"
+                value={newBookmark.label}
+                onChange={handleBookChange}
+                name="label"
+                placeholder={'describe what this link is'}
               />
               <button>Submit</button>
             </form>
@@ -91,12 +104,8 @@ const SubjectDetail = (props) => {
               {subj.notes?.map((note) => (
                 <div key={note._id}>
                   <h3>{note.content}</h3>
-                  <form action="" method="POST">
-                    <button>Update</button>
-                  </form>
-                  <form action="" method="POST">
-                    <button>Delete</button>
-                  </form>
+                  <button onClick={updateNote}>Update</button>
+                  <button onClick={() => deleteNote(note._id)}>Delete</button>
                 </div>
               ))}
               <br />
@@ -104,10 +113,12 @@ const SubjectDetail = (props) => {
             <td>
               {subj.bookmarks?.map((bookmark) => (
                 <div key={bookmark._id}>
-                  <h3>{bookmark.url}</h3>
-                  <form action="" method="POST">
-                    <button>Delete</button>
-                  </form>
+                  <Link to={bookmark.url}>
+                    <h3>{bookmark.label}</h3>
+                  </Link>
+                  <button onClick={() => deleteBookmark(bookmark._id)}>
+                    Delete
+                  </button>
                 </div>
               ))}
             </td>

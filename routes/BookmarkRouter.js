@@ -10,7 +10,7 @@ router.get(
   controller.getBookmarkById
 )
 router.post(
-  '/:bookmark_id',
+  '/',
   middleware.stripToken,
   middleware.verifyToken,
   controller.createBookmark

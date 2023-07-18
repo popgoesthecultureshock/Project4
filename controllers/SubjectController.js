@@ -13,6 +13,7 @@ const getSubjectById = async (req, res) => {
     const subject = await Subject.findById(req.params.subject_id)
       .populate('language')
       .populate('notes')
+      .populate('bookmarks')
     res.send(subject)
   } catch (error) {
     throw error
