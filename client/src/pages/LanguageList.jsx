@@ -13,8 +13,6 @@ const LanguageList = (props) => {
   // const [searched, toggleSearched] = useState(false)
   // const [searchQuery, setSearchQuery] = useState('')
   const [subjects, setSubjects] = useState([])
-  const [notes, setNotes] = useState([])
-  const [bookmarks, setBookmarks] = useState([])
 
   // const getSearchResults = async (e) => {
   //   e.preventDefault()
@@ -37,19 +35,9 @@ const LanguageList = (props) => {
       console.log(data)
       setSubjects(data)
     }
-    const handleNotes = async () => {
-      const data = await getNotes()
-      setNotes(data)
-    }
-    const handleBookmarks = async () => {
-      const data = await getBookmarks()
-      setBookmarks(data)
-    }
     handleSubs()
-    handleNotes()
-    handleBookmarks()
   }, [])
-
+  console.log(props)
   return (
     <div className="lang-page">
       {/* <div className="search">
@@ -73,29 +61,23 @@ const LanguageList = (props) => {
           {props.langs.map((lang) => (
             // <div className="lang-header" key={lang.id}>
             // <div className="lang-card">
-            <tr>
-              <th>
-                <h1>{lang.name}</h1>
-              </th>
-              <th>
-                <SubjectForm id={lang._id} />
-              </th>
+            <div key={lang._id}>
+              <tr>
+                <th>
+                  <h1>{lang.name}</h1>
+                  <br />
+                  <SubjectForm id={lang._id} handleLangs={props.handleLangs} />
+                </th>
 
-              {/* <div className="info-wrapper"> */}
-              {lang.subject.map((subj) => (
-                <td>
-                  <Link to={`${subj._id}`}>{subj.title}</Link>
-                </td>
-              ))}
-
-              <td>
-                <p>{lang.notes}</p>
-              </td>
-              <td>
-                <p>{lang.bookmarks}</p>
-              </td>
-              {/* </div> */}
-            </tr>
+                {lang.subject?.map((subj) => (
+                  <div key={subj._id}>
+                    <td>
+                      <Link to={`${subj._id}`}>{subj.title}</Link>
+                    </td>
+                  </div>
+                ))}
+              </tr>
+            </div>
             // </div>
             // </div>
           ))}

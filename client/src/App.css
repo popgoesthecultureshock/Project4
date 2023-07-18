@@ -49,6 +49,7 @@ header.navbar {
 }
 h2, h1 {
   margin: 0;
+  
 }
 .homeDivs {
   display: flex;
@@ -74,4 +75,10 @@ h2, h1 {
 .actualHomeDivs:hover {
   height:175px;
   width:175px;
+}
+
+.detail-title {
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
 }

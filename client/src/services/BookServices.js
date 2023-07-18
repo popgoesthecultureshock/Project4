@@ -18,9 +18,10 @@ export const getBookmarkById = async (id) => {
   }
 }
 
-export const createBookmark = async (data, id) => {
+export const createBookmark = async (data) => {
   try {
-    const res = await Client.post(`/book/${id}`, data)
+    console.log(data)
+    const res = await Client.post('/book', data)
     return res.data
   } catch (error) {
     throw error

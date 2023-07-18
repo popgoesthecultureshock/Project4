@@ -34,11 +34,12 @@ const App = () => {
     setUser(user)
   }
 
+  const handleLangs = async () => {
+    const data = await getLangs()
+    setLangs(data)
+  }
+
   useEffect(() => {
-    const handleLangs = async () => {
-      const data = await getLangs()
-      setLangs(data)
-    }
     const token = localStorage.getItem('token')
     if (token) {
       checkToken()
@@ -65,7 +66,10 @@ const App = () => {
               />
             }
           />
-          <Route path="/list" element={<LanguageList langs={langs} />} />
+          <Route
+            path="/list"
+            element={<LanguageList langs={langs} handleLangs={handleLangs} />}
+          />
           <Route
             path="/list/:id"
             element={<SubjectDetail langs={langs} newLang={newLang} />}

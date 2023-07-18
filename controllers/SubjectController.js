@@ -21,11 +21,12 @@ const getSubjectById = async (req, res) => {
 
 const createSubject = async (req, res) => {
   try {
-    const language = await Lang.findById(req.params.id)
+    const language = await Lang.findById(req.params.language_id)
     const subject = await Subject.create({
       ...req.body,
       language: req.params.id
     })
+    console.log(language.subject)
     language.subject.push(subject._id)
     await language.save()
     res.send(subject)

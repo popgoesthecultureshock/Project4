@@ -11,7 +11,7 @@ router.get(
 )
 
 router.post(
-  '/:subject_id',
+  '/:language_id',
   middleware.stripToken,
   middleware.verifyToken,
   controller.createSubject

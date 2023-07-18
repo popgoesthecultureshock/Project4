@@ -45,26 +45,75 @@ const SubjectDetail = (props) => {
   }
   const handleBookSubmit = async (e) => {
     e.preventDefault()
-    await createBookmark(newBookmark, props.id)
+    console.log(id)
+    await createBookmark(newBookmark, id)
   }
 
   return (
     <div className="lang-page">
       <div className="lang-header">{/* <h1>{subj.language.name}</h1> */}</div>
-      <div className="info-wrapper">
+      <div className="detail-title">
         <h2>{subj.title}</h2>
       </div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={newNote.content}
-          onChange={handleChange}
-          name="content"
-          placeholder={'write notes here'}
-        />
-        <button>Submit</button>
-      </form>
-      <div></div>
+      <table>
+        <tr>
+          <td>
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                value={newNote.content}
+                onChange={handleChange}
+                name="content"
+                placeholder={'write notes here'}
+              />
+              <button>Submit</button>
+            </form>
+          </td>
+          <td>
+            <form onSubmit={handleBookSubmit}>
+              <input
+                type="text"
+                value={newBookmark.url}
+                onChange={handleBookChange}
+                name="content"
+                placeholder={'add bookmarks here'}
+              />
+              <button>Submit</button>
+            </form>
+          </td>
+        </tr>
+      </table>
+
+      <div>
+        <table>
+          <tr>
+            <td>
+              {subj.notes?.map((note) => (
+                <div key={note._id}>
+                  <h3>{note.content}</h3>
+                  <form action="" method="POST">
+                    <button>Update</button>
+                  </form>
+                  <form action="" method="POST">
+                    <button>Delete</button>
+                  </form>
+                </div>
+              ))}
+              <br />
+            </td>
+            <td>
+              {subj.bookmarks?.map((bookmark) => (
+                <div key={bookmark._id}>
+                  <h3>{bookmark.url}</h3>
+                  <form action="" method="POST">
+                    <button>Delete</button>
+                  </form>
+                </div>
+              ))}
+            </td>
+          </tr>
+        </table>
+      </div>
       <Link to="/list">
         <button>Back</button>
       </Link>

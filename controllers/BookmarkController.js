@@ -1,4 +1,4 @@
-const { Bookmarks } = require('../models')
+const { Bookmarks, Subject } = require('../models')
 
 const getAllBookmarks = async (req, res) => {
   try {
@@ -21,8 +21,12 @@ const getBookmarkById = async (req, res) => {
 
 const createBookmark = async (req, res) => {
   try {
-    const bookmark = await Bookmarks.create({ ...req.body })
-    res.send(bookmark)
+    console.log(req.body)
+    const book = await Bookmarks.create(req.body)
+    let subj = await Subject.findById(req.body.subject)
+    subj.bookmarks.push(book._id)
+    await subj.save()
+    res.send(note)
   } catch (error) {
     throw error
   }

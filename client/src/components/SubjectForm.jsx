@@ -11,12 +11,11 @@ const SubjectForm = (props) => {
     setNewSubject({ ...newSubject, [e.target.name]: e.target.value })
   }
 
-  let navigate = useNavigate()
-
   const handleSubmit = async (e) => {
     e.preventDefault()
     await createSubject(newSubject, props.id)
-    navigate('/list')
+    props.handleLangs()
+    setNewSubject({ title: '' })
   }
 
   return (
