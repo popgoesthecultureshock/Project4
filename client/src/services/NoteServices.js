@@ -30,6 +30,7 @@ export const createNote = async (data) => {
 
 export const updateNote = async (data, id) => {
   try {
+    console.log(data)
     const res = await Client.put(`/note/${id}`, data)
     return res.data
   } catch (error) {

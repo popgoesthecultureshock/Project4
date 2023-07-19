@@ -36,17 +36,11 @@ const SubjectDetail = (props) => {
     // handleBookmarks()
   }, [])
 
-  const updateNote = async (id, content) => {
-    setEditNote({ id, content })
-  }
-  const handleUpdateNote = async (id, content) => {
-    await updateNote(id, { content })
-    console.log(form)
-  }
   const handleSubmitNote = async (e) => {
     e.preventDefault()
     if (editNote) {
-      handleUpdateNote(editNote.id, newNote.content)
+      await updateNote({ content: editNote.content }, editNote.id)
+      setEditNote(null)
     } else {
       await createNote({ ...newNote, subject: id })
       setNewNote({ content: '' })
@@ -59,6 +53,9 @@ const SubjectDetail = (props) => {
   }
   const handleBookChange = (e) => {
     setNewBookmark({ ...newBookmark, [e.target.name]: e.target.value })
+  }
+  const handleUpdateChange = (e) => {
+    setEditNote({ ...editNote, [e.target.name]: e.target.value })
   }
 
   const handleSubmit = async (e) => {
@@ -82,10 +79,10 @@ const SubjectDetail = (props) => {
     getSubj()
   }
 
-  const updateNoteButton = async () => {
-    updateNote()
-    getSubj()
-  }
+  // const updateNoteButton = async () => {
+  //   updateNote()
+  //   getSubj()
+  // }
 
   const deleteNoteButton = async (id) => {
     deleteNote(id)
@@ -151,18 +148,31 @@ const SubjectDetail = (props) => {
               <td>
                 {subj.notes?.map((note) => (
                   <div key={note._id}>
-                    <p>{note.content}</p>
-                    {/* <input
-                    type="text"
-                    name="content"
-                    value={editNote ? editNote.content : newNote.content}
-                    onChange={handleSubmitNote}
-                    placeholder="edit notes here"
-                  /> */}
-                    <button onClick={updateNoteButton}>Update</button>
-                    <button onClick={() => deleteNoteButton(note._id)}>
-                      Delete
-                    </button>
+                    {editNote && editNote.id === note._id ? (
+                      <form onSubmit={handleSubmitNote}>
+                        <input
+                          type="text"
+                          name="content"
+                          value={editNote.content}
+                          onChange={handleUpdateChange}
+                        />
+                        <button>Save</button>
+                      </form>
+                    ) : (
+                      <div>
+                        <p>{note.content}</p>
+                        <button
+                          onClick={() =>
+                            setEditNote({ id: note._id, content: note.content })
+                          }
+                        >
+                          Update
+                        </button>
+                        <button onClick={() => deleteNoteButton(note._id)}>
+                          Delete
+                        </button>
+                      </div>
+                    )}
                   </div>
                 ))}
                 <br />
