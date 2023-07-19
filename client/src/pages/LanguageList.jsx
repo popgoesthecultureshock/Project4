@@ -61,8 +61,8 @@ const LanguageList = (props) => {
           {props.langs.map((lang) => (
             // <div className="lang-header" key={lang.id}>
             // <div className="lang-card">
-            <div key={lang._id}>
-              <tr>
+            <tbody>
+              <tr key={lang._id}>
                 <th>
                   <h1>{lang.name}</h1>
                   <br />
@@ -70,14 +70,12 @@ const LanguageList = (props) => {
                 </th>
 
                 {lang.subject?.map((subj) => (
-                  <div key={subj._id}>
-                    <td>
-                      <Link to={`${subj._id}`}>{subj.title}</Link>
-                    </td>
-                  </div>
+                  <tr key={subj._id}>
+                    <Link to={`${subj._id}`}>{subj.title}</Link>
+                  </tr>
                 ))}
               </tr>
-            </div>
+            </tbody>
             // </div>
             // </div>
           ))}

@@ -9,6 +9,15 @@ export const getLangs = async () => {
   }
 }
 
+export const getLangById = async (id) => {
+  try {
+    const res = await Client.get(`/list/${id}`)
+    return res.data
+  } catch (error) {
+    throw error
+  }
+}
+
 export const createLang = async (data) => {
   try {
     const res = await Client.post('/list', data)

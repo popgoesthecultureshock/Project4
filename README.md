@@ -27,7 +27,7 @@ _-_-\*
 
 ### **_About the App_**
 
-#### [THIS APP] is a React web application designed to provide structure to the ever-changing, ever-improving coding languages. It started as an idea to get all the lessons, VSCodes, bookmarks, assignments, projects, subjects, etc. all in one convenient location; saving tabs and tabs and open windows and open windows. Speed up your computer by minimizing the applications open, and inputing what you've learned, are learning, or would like to learn in this easily navigatable app. Log in to save your specific languages, lessons and subjects to review.
+#### [THIS APP] is a React web application designed to provide structure to the ever-changing, ever-improving coding languages. It started as an idea to get all the lessons, VSCodes, bookmarks, assignments, projects, subjects, etc. all in one convenient location; saving tabs and tabs and open windows and open windows. Speed up your computer by minimizing the applications open, and inputing what you've learned, are learning, or would like to learn in this easily navigatable app. Log in to save your specific languages, lessons and subjects to review. Show your DOM who's boss with DOMdaddy.
 
 ### **_Specifications_**
 

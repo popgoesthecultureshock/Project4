@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { createLang } from '../services/LangServices'
+import { getLangById } from '../services/LangServices'
 
 const InputLesson = (props) => {
   const [newLang, setNewLang] = useState({
@@ -14,28 +15,39 @@ const InputLesson = (props) => {
     setNewLang({ ...newLang, [e.target.name]: e.target.value })
   }
 
+  const getLangList = async (id) => {
+    let response = await getLangById(id)
+    setNewLang(response)
+  }
+
   let navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     await createLang(newLang)
+    getLangList()
     navigate('/list')
   }
 
   return (
     <div className="form">
-      <h1>Add a Subject You're Working On</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={newLang.name}
-          onChange={handleChange}
-          name="name"
-          placeholder={'language'}
-        />
+      <div>
+        <h1>Add a Subject You're Working On</h1>
+      </div>
 
-        <button>Submit</button>
-      </form>
+      <div>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            value={newLang.name}
+            onChange={handleChange}
+            name="name"
+            placeholder={'language/framework/etc'}
+          />
+
+          <button>Submit</button>
+        </form>
+      </div>
     </div>
   )
 }

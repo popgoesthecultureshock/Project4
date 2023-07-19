@@ -1,13 +1,40 @@
 body {
   margin: 0;
-  /* display: flex;
-  justify-content: center; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 
+}
+#root {
+  width: 100%;
 }
 main {
   margin: 0;
 }
-/* .home, .form {
+.home, .subj-page, .form, .lang-page, .signin, h2 {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.form {
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.homeDivs {
+  padding: 0;
+  margin-right: 200px;
+  margin-left: 200px;
+}
+.subj-page {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 65%;
+  padding-left: 375px;
+}
+/* .inputTable {
   justify-content: center;
   align-items: center;
 } */
@@ -15,7 +42,7 @@ main {
 header.navbar {
   display: flex;
   justify-content:space-between;
-  width: 98%;
+  width: 98.6%;
   float: left;
   align-items: center;
   color: white;
@@ -76,11 +103,4 @@ h2, h1 {
 .actualHomeDivs:hover {
   height:175px;
   width:175px;
-}
-
-.lang-page {
-  /* display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap; */
 }
