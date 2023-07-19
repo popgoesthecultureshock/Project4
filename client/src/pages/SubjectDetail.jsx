@@ -68,7 +68,7 @@ const SubjectDetail = (props) => {
     // }
     getSubj()
     await createNote({ ...newNote, subject: id })
-    setNewNote({ content: '' }).sort((a, b) => Number(b.date) - Number(a.date))
+    setNewNote({ content: '' })
     getSubj()
   }
   const handleBookSubmit = async (e) => {
@@ -108,7 +108,9 @@ const SubjectDetail = (props) => {
               <tr>
                 <td>
                   <form onSubmit={handleSubmit}>
-                    <input
+                    <textarea
+                      rows="5"
+                      cols="40"
                       type="text"
                       value={newNote.content}
                       onChange={handleChange}
@@ -146,11 +148,13 @@ const SubjectDetail = (props) => {
           <tbody>
             <tr>
               <td>
-                {subj.notes?.map((note) => (
+                {subj.notes?.reverse().map((note) => (
                   <div key={note._id}>
                     {editNote && editNote.id === note._id ? (
                       <form onSubmit={handleSubmitNote}>
-                        <input
+                        <textarea
+                          rows="8"
+                          cols="60"
                           type="text"
                           name="content"
                           value={editNote.content}

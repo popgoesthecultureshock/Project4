@@ -32,17 +32,19 @@ main {
   align-items: center;
   justify-content: center;
   width: 65%;
-  padding-left: 375px;
+  padding-left: 200px;
 }
 /* .inputTable {
   justify-content: center;
   align-items: center;
 } */
-
+input[type="text"] {
+  width: 200px;
+}
 header.navbar {
   display: flex;
   justify-content:space-between;
-  width: 98.6%;
+  width: 98%;
   float: left;
   align-items: center;
   color: white;

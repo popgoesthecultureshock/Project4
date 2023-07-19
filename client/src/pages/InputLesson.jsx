@@ -15,17 +15,14 @@ const InputLesson = (props) => {
     setNewLang({ ...newLang, [e.target.name]: e.target.value })
   }
 
-  const getLangList = async (id) => {
-    let response = await getLangById(id)
-    setNewLang(response)
-  }
-
   let navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    await createLang(newLang)
-    getLangList()
+    let lang = await createLang(newLang)
+    let langArray = [...props.langs]
+    langArray.push(lang)
+    props.setLangs(langArray)
     navigate('/list')
   }
 
